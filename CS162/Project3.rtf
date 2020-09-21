@@ -1,0 +1,225 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22 Fantasy Combat Game\par
+\par
+Goals\par
+\par
+Develop classes from program requirements\par
+Implement characters using polymorphism\par
+Implement a menu to allow the user to test the characters\par
+In this project, we will develop a fantasy combat game. This is going to be part 1 of the game development in which we develop the characters and a menu to test the characters.\par
+\par
+ \par
+\par
+Requirements\par
+\par
+Characters\par
+\par
+Our game universe contains Vampire, Barbarian, Blue Men, Medusa, and Harry Potter. Each character has attributes of attack, defense, armor, and strength points.\par
+\par
+The table containing the attributes data is shown below.\par
+\par
+Note: \ldblquote 1d12\rdblquote  means rolling one 12-sided die, and \ldblquote 2d6\rdblquote  means rolling 2 6-sided dice, etc.\par
+\par
+Type\par
+\par
+Attack\par
+\par
+Defense\par
+\par
+Armor\par
+\par
+Strength Points\par
+\par
+Vampire1\par
+\par
+1d12\par
+\par
+1d6* Charm\par
+\par
+1\par
+\par
+18\par
+\par
+Barbarian2   \par
+\par
+2d6\par
+\par
+2d6\par
+\par
+0\par
+\par
+12\par
+\par
+Blue Men3   \par
+\par
+2d10\par
+\par
+3d6\par
+\par
+3\par
+\par
+12 *Mob\par
+\par
+Medusa4   \par
+\par
+2d6* Glare\par
+\par
+1d6\par
+\par
+3\par
+\par
+8\par
+\par
+Harry Potter5   \par
+\par
+2d6\par
+\par
+2d6\par
+\par
+0\par
+\par
+10/20*Hogwarts\par
+\par
+ \par
+\par
+The characters also have their own characteristics as well as special abilities:\par
+\par
+Type\par
+\par
+Characterstics\par
+\par
+Special Abilities\par
+\par
+Vampire\par
+\par
+Suave, debonair, but vicious and surprisingly resilient.\par
+\par
+Charm: Vampires can charm an opponent into not attacking. For a given attack there is a 50% chance that their opponent does not actually attack them.\par
+\par
+Barbarian\par
+\par
+Think Conan or Hercules from the movies. Big sword, big muscles, bare torso.\par
+\par
+ \par
+\par
+Blue Men\par
+\par
+They are small, 6 inch tall, but fast and tough. They are hard to hit so they can take some damage. They can also do a LOT of damage when they crawl inside enemies\rquote  armor or clothing.\par
+\par
+Mob: Blue Men are actually a swarm of small individuals. For every 4 points of damage, they lose one defense die. For example, if they have a strength of 8, they would have 2d6 for defense.\par
+\par
+Medusa\par
+\par
+Scrawny lady with snakes for hair which helps her during combat. Just don\rquote t look at her!\par
+\par
+Glare: If a Medusa rolls a 12 when attacking then the target instantly gets turned into stone and Medusa wins! If Medusa uses Glare on Harry Potter on his first life, then Harry Potter comes back to life.\par
+\par
+Harry Potter\par
+\par
+Harry Potter is a wizard.\par
+\par
+Hogwarts: If Harry Potter's strength reaches 0 or below, he immediately recovers and his total strength becomes 20. If he were to die again, then he\rquote s dead.\par
+\par
+ \par
+\par
+Note:\par
+\par
+If Medusa uses \ldblquote glare\rdblquote  on Harry Potter on his first life, then Harry Potter comes back to life after using \ldblquote hogwarts\rdblquote .\par
+If the Vampire\rquote s \ldblquote charm\rdblquote  ability activates when Medusa uses \ldblquote glare\rdblquote , the Vampire\rquote s charm trumps Medusa\rquote s glare.\par
+The sample characters are unbalanced intentionally. This will help you in debugging your program! Some will win a lot, while others won\rquote t.\par
+ \par
+\par
+Gameplay\par
+\par
+Each combat between 2 characters ends when one of the characters die.\par
+\par
+Each round consists of two attacks, one for each character. For each attack, attacker and defender both generate dice rolls. The type and number of dice is listed above in the table.\par
+\par
+The actual damage inflicted from the attacker onto the defender is calculated as follows:\par
+\par
+Damage = attacker\rquote s roll \endash  defender\rquote s roll \endash  defender\rquote s armor\par
+\par
+Then the value of that damage is subtracted from the defender\rquote s strength points.\par
+\par
+ \par
+\par
+Example: character A attacks with dice roll of: 8 10, which means it has an attack of 18, and character B defends with dice roll of 5 6, which means it has defense of 11, character B also has an armor of 3. So the actual damage inflicted from A to B is 18 \endash  11 \endash  3 = 4.\par
+\par
+If character B has strength point of 8 during that round, the new strength point would be 8 \endash  4 = 4, which means next round B will have strength point of 4.\par
+\par
+If character B has strength point of 3 during that round, the new strength point would be 3 \endash  4 = -1, which means character B dies.\par
+\par
+Note: Deciding who starts attacking is your own design decision.\par
+\par
+ \par
+\par
+Class\par
+\par
+The program should contain a Character base class. The base class should be an abstract class. All the characters should have their own subclass that inherits from the Character class.\par
+\par
+Each class should only have its own information or data. For example, when A attacks B, the program should call A\rquote s attack function, which should return the damage attacked. Then O2\rquote s defense function will take the damage attacked, and calculate the actual damage inflicted, and apply that damage to the defender\rquote s strength points.\par
+\par
+You can add whatever you want to the parent class but it must include an attack function and defense function. Also, the subclass should not have dependencies on which type of character the attacker is. For example, It is not an acceptable solution to have an external function check if the attacker is Medusa if a 12 is rolled; the special traits must happen within the character classes themselves.\par
+\par
+ \par
+\par
+Menu\par
+\par
+To be able to test and play the game, write a menu. The menu should display five characters by their names, and prompt the user to select two characters to fight one another. You must account for two characters of the same type, so Vampire can fight Vampire, etc. For each round, display the results of each round on the screen so you and your grading TA can verify that calculations are correct and the game is functioning properly.\par
+\par
+The following information must be displayed for each attack:\par
+\par
+Attacker type.\par
+Defender type, armor, strength point.\par
+The attacker's attack dice roll.\par
+The defender\rquote s defend dice roll.\par
+The total inflicted damage calculation.\par
+The defender\rquote s updated strength point amount after subtracting damage.\par
+After the combat is over, ask users to:\par
+\par
+Play again\par
+Exit the game\par
+Note: This is the first part of the larger project, please do not add any characters of your own.\par
+\par
+ \par
+\par
+Reflection Document\par
+\par
+The requirements for the reflection document have been specified in the Project 1 document.\par
+\par
+Make sure your document has design descriptions, test tables, and reflections. The reflections include: changes in design, problems encountered, and how you solve those problems. Additionally, the reflection document should include a class hierarchy diagram.\par
+\par
+ \par
+\par
+Suggestion\par
+\par
+Create your design before coding anything! You should even be outlining your test plan. The grading is set up to encourage you to develop your program incrementally! Start with the base and Barbarian classes. Create the testing program that runs sample combats for you to test your code.  How do you handle random die rolls when testing your code?  At each step of the coding process, make notes about what worked, what has been changed from your design.  Doing this will make writing the reflections easier.\par
+\par
+Note: this project involves a lot of details and many are not specified as requirements here. In this case, they will be your design decisions.  You can include these decisions in your reflection documents.  If you are still not sure whether something is allowed or which is the proper way to go, post your question on Piazza and TAs will clarify it.\par
+\par
+ \par
+\par
+What you need to Submit\par
+\par
+All the program files including header and source files (.cpp/.hpp)\par
+makefile\par
+Your reflection pdf file\par
+Important: Put all the files in a single .zip file and submit it on Canvas.\par
+\par
+ \par
+\par
+Grading\par
+\par
+Programming style and documentation (10%)\par
+In each of these, the virtual attack and defense functions must work correctly:\par
+Create the base class (10%)\par
+Create the Barbarian class (10%)\par
+Create the Vampire class, override defense function (10%)\par
+Create the Blue Men class (10%)\par
+Create the Medusa class, override attack function (10%)\par
+Create the Harry Potter class (10%)\par
+Create a test driver program to create character objects which make attack and defense rolls required to show your classes work correctly (20%)\par
+Reflections document to include the design description, test plan, test results, and comments about how you resolved problems during the assignment (10%)\par
+ \par
+}
+ 

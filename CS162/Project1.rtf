@@ -1,0 +1,118 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22 Langton\rquote s Ant\par
+\par
+Goals\par
+\par
+Review programming with dynamic arrays\par
+Convert program requirements to a program design\par
+Implement the program design\par
+ \par
+\par
+In this project, we will implement a program that simulates Langton\rquote s Ant. For explanation please read it on Wikipedia:  {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Langton%27s_ant"}}{\fldrslt{\ul\cf1 https://en.wikipedia.org/wiki/Langton%27s_ant}}}\f0\fs22  (Links to an external site.). Note that the Langton\rquote s Ant simulation can be considered as a cellular automaton, a model that has simple rules governing its replication or destruction.\par
+\par
+ \par
+\par
+Requirements\par
+\par
+Langton\rquote s Ant Rule\par
+\par
+The rule of Langton\rquote s Ant is very simple: the ant is placed onto the board that is filled with white spaces, and starts moving forward. For each step forward, the Langton\rquote s ant will follow 2 rules:\par
+\par
+If the ant is on a white space, turn right 90 degrees and change the space to black.\par
+If the ant is on a black space, turn left 90 degrees and change the space to white.\par
+After that the ant moves to the next step and continue moving forward. The ant will follow these rules, and continue moving around the board, until the number of steps runs out.\par
+\par
+ \par
+\par
+Ant Class\par
+\par
+The Ant class should contain all the information that includes:\par
+\par
+The ant\rquote s location\par
+The ant\rquote s orientation (the direction of the ant)\par
+How do you keep track of the color of the board\rquote s spaces? How about the ant\rquote s orientation?\par
+\par
+How about class functions? Make sure only the class function can modify the variables of Ant class, which means outside program cannot directly change the variables inside the Ant class, and instead should call the functions inside Ant class to indirectly modify variables. You can determine whether you need to have a separate board class and how you should design it.\par
+\par
+ \par
+\par
+Langton\rquote s Ant Program\par
+\par
+The ant starts at a user specified location on the board. For the initial direction of the ant, it can be either random, or fixed, or a choice from the user; it is up to your design decision. During each step, the program should print the board. If the space is occupied by an ant, no matter what the color of that square is, the program should print a \ldblquote *\rdblquote  on that space; otherwise, if the space is white space, print a space character, and if the space is a black space, print a \ldblquote #\rdblquote  character.\par
+\par
+Below is an example printing output of a step of Langton\rquote s Ant with board of 5 rows and 5 columns: (Note that the space the ant is occupying is a white space)\par
+\par
+ant.jpg\par
+\par
+Please consider edge cases before you start programming. For example, what happens when the Ant hits the corner or side of the board? The program cannot let the ant go out of bound or it is going to cause segmentation error. How to solve the edge case is up to your design decision, but it must be handled properly. Here are some of the actions past students have taken in these edge cases:\par
+\par
+Skip the step forward step, make another turn and then continue on.\par
+Wrap the board around so the ant will appear on the other side.\par
+Turn the ant around and send it back to the board.\par
+ \par
+\par
+Important: When encountering edge cases, crashing the program, or quitting the program is not a proper solution and your grade will be deducted. No matter what happened, you cannot terminate the game before it reaches the designated step.\par
+\par
+ \par
+\par
+Menu\par
+\par
+In this project, we are going to implement menu functions that can be reused in later programs. Menu functions are functions that prints menu options to the screen for the user, and after the user makes a choice, verify the user\rquote s input, and return the value back to the program. The menu function should be easily changeable to fit whatever program you are writing.\par
+\par
+Note: If you want to write a menu class instead of a menu function, that is fine too.\par
+\par
+Below is the detail of the menu functions for this project:\par
+\par
+When the program starts the menu should provide 2 options:\par
+\par
+Start Langton\rquote s Ant simulation\par
+Quit\par
+If the user decided to quit, the program should quit. Otherwise, start the Langton\rquote s Ant simulation. After the simulation starts, the program should prompt user for all the information to run the simulation, including:\par
+\par
+The number of rows for the board.\par
+The number of columns for the board.\par
+The number of steps during simulation.\par
+The starting row of the ant.\par
+The starting column of the ant.\par
+ \par
+\par
+After the simulation ended, the menu should provide user 2 choices: play again, or quit.\par
+\par
+You can customize the menu, or how the program prompt use for inputs however you want, as long as all the above requirements are met. You can even make the simulation information prompts a menu, by providing an option menu for each information, allowing user to modify the data as they wish before starting simulation, but it is not a requirement.\par
+\par
+ \par
+\par
+Input Validation\par
+\par
+Input validation is the testing for input that is supplied from outside source. (including human input)\par
+\par
+Consider the following scenario: if the program request for an input of integer and the user instead input a character of \ldblquote t\rdblquote , it would cause the program to crash. But with an input validation, the error is caught, and the input is requested again, until the user input a correct type of data.\par
+\par
+The requirement of input validation, is to make sure the program\par
+\par
+does not crash from undesired input\par
+request for input repeatedly until the correct data is inputted.\par
+A good way of planning input validation is to first think about what kind of input is desired for each input in a program. For example, for choosing the starting row of the ant, what type of data is desired? Integer. What kind of integer? Depending on design, the desired integer can be positive, and not higher than the number of rows the board has.\par
+\par
+If you would like to add more feature to your input validation, or add a limit to the integer inputs, you are free to do so, as long as it makes sense and does not affect program testing.\par
+\par
+If you have any question, there will be a discussion section on Piazza.\par
+\par
+ \par
+\par
+Document (Design + Reflection)\par
+\par
+You need to create your program design BEFORE you start coding. Your design needs to be included in your document.\par
+\par
+Simply stated, program design is identifying the problem to be solved, modularizing and describing the structure of program, and making a test table to that fulfills the requirements of the program.\par
+\par
+For test table, please include test plan, expected output, and actual output. The test plan should be robust. The expected output is based on the requirement. If your actual output deviates from your expected output, that usually means the program behavior is deviating from the requirements.  Following is a Examples Test Plan.pdfPreview the document\par
+\par
+In your reflection, you should explain what design changes you made, how you solved some problems you encountered, and what you learned for this project. The TA will grade on how well your implementation matches your design.\par
+\par
+ \par
+\par
+Note: There are a lot of details that are not determined in the requirements. They are left for you to decide, as long as your program meets the requirements. For more questions or clarification, feel free to post a question on Piazza, or send an email to your grading TA.\par
+}
+ 
